@@ -52,3 +52,52 @@ FROM information_schema.tables
 WHERE table_schema = 'public'
   AND table_type = 'BASE TABLE'
 ORDER BY table_name;
+
+INSERT INTO customers (first_name, last_name, email, phone)
+VALUES('Aisha', 'Khumalo', 'aisha@example.com', '0710000001'),
+    ('Daniel', 'Mokoena', 'daniel@example.com', '0720000002'),
+	('Ntiyiso','Chauke','ntiyisovheli@gmail.com','0673404854'),
+	('Duniso','Chauke','dunisochauke4@gmail.com','0731057484'),
+	('Samson','Chauke','samchauke@gmail.com.com','0783890737'),
+	('Betty','Chauke','bettychauke@gmail.com','0726907868');
+
+SELECT * FROM customers;
+
+INSERT INTO products (product_name, description, price, stock_quantity)
+VALUES
+    ('Wireless Mouse', 'Wireless computer mouse', 249.99, 30),
+    ('Mechanical Keyboard', 'USB mechanical keyboard', 899.00, 15),
+    ('USB-C Cable', 'One metre USB-C cable', 99.50, 50),
+	 ('USB-C Cable', '2 metre USB-C cable', 209.50, 10),
+	  ('USB-B Cable', 'One metre USB-C cable', 59.50, 30),
+	  ('wireless Keyboard', 'wireless keyboard', 1000.00, 10);
+
+SELECT * FROM products;
+
+SELECT customer_id, first_name, last_name
+FROM customers
+ORDER BY customer_id;
+
+INSERT INTO orders (customer_id, status)
+VALUES
+    (1, 'PAID'),
+    (2, 'PENDING'),
+	(3, 'PENDING'),
+	 (4, 'PENDING'),
+	  (5, 'PAID');
+
+SELECT order_id, customer_id, status FROM orders;
+SELECT product_id, product_name, price FROM products;
+
+INSERT INTO order_items (order_id, product_id, quantity, unit_price)
+VALUES
+    (1, 1, 2, 249.99),
+    (1, 3, 1, 99.50),
+    (2, 2, 1, 899.00);
+	
+SELECT * FROM customers;
+SELECT * FROM products;
+SELECT * FROM orders;
+SELECT * FROM order_items;
+	
+	
