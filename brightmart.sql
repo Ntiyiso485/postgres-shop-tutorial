@@ -179,4 +179,178 @@ FROM customers AS c
 LEFT JOIN orders AS o
     ON c.customer_id = o.customer_id
 ORDER BY c.customer_id;
+
+SELECT
+    o.order_id,
+    CONCAT(c.first_name, ' ', c.last_name) AS customer_full_name,
+    o.order_date,
+    o.status
+FROM orders AS o
+INNER JOIN customers AS c
+    ON o.customer_id = c.customer_id;
+
+
+SELECT
+    o.order_id,
+    p.product_name,
+    oi.quantity,
+    oi.unit_price
+FROM orders AS o
+INNER JOIN order_items AS oi
+    ON o.order_id = oi.order_id
+INNER JOIN products AS p
+    ON oi.product_id = p.product_id;
+
+SELECT
+    c.customer_id,
+    c.first_name,
+    c.last_name,
+    c.email,
+    o.order_id,
+    o.status
+FROM customers AS c
+LEFT JOIN orders AS o
+    ON c.customer_id = o.customer_id
+ORDER BY c.customer_id;
+
+SELECT
+    o.order_id,
+    c.email,
+    p.product_name,
+    oi.quantity
+FROM orders AS o
+INNER JOIN customers AS c
+    ON o.customer_id = c.customer_id
+INNER JOIN order_items AS oi
+    ON o.order_id = oi.order_id
+INNER JOIN products AS p
+    ON oi.product_id = p.product_id;
+
+SELECT product_id, product_name, price
+FROM products
+WHERE product_name = 'USB-C Cable';
+
+UPDATE products
+SET price = 109.50
+WHERE product_name = 'USB-C Cable';
+
+SELECT product_name, price
+FROM products
+WHERE product_name = 'USB-C Cable';
+
+UPDATE products
+SET price = 109.50;
+
+ALTER TABLE customers
+ADD COLUMN city VARCHAR(80);
+
+ALTER TABLE customers
+RENAME COLUMN phone TO phone_number;
+
+ALTER TABLE customers
+ALTER COLUMN city TYPE VARCHAR(100);
+
+ALTER TABLE customers
+DROP COLUMN city;
+
+SELECT customer_id, first_name, last_name, email
+FROM customers
+WHERE email = 'test@example.com';
+
+DELETE FROM customers
+WHERE email = 'test@example.com';
+
+BEGIN;
+
+UPDATE products
+SET price = 119.50
+WHERE product_name = 'USB-C Cable';
+
+SELECT product_name, price
+FROM products
+WHERE product_name = 'USB-C Cable';
+
+SELECT
+    SUM(quantity * unit_price) AS total_order_value
+FROM order_items;
+
+SELECT
+    AVG(price) AS average_product_price
+FROM products;
+
+SELECT
+    ROUND(AVG(price), 2) AS average_product_price
+FROM products;
+
+SELECT COUNT(*) AS total_customers
+FROM customers;
+
+SELECT COUNT(*) AS total_products
+FROM products;
+
+SELECT
+    MIN(price) AS cheapest_price,
+    MAX(price) AS most_expensive_price
+FROM products;
+
+SELECT
+    order_id,
+    SUM(quantity * unit_price) AS order_total
+FROM order_items
+GROUP BY order_id
+ORDER BY order_id;
+
+SELECT
+    c.customer_id,
+    c.first_name,
+    c.last_name,
+    SUM(oi.quantity * oi.unit_price) AS total_spent
+FROM customers AS c
+INNER JOIN orders AS o
+    ON c.customer_id = o.customer_id
+INNER JOIN order_items AS oi
+    ON o.order_id = oi.order_id
+GROUP BY c.customer_id, c.first_name, c.last_name
+ORDER BY total_spent DESC;
+
+SELECT
+    order_id,
+    SUM(quantity * unit_price) AS order_total
+FROM order_items
+GROUP BY order_id
+HAVING SUM(quantity * unit_price) > 500;
+
+SELECT
+    SUM(quantity * unit_price) AS total_order_value
+FROM order_items;
+
+SELECT
+    AVG(price) AS average_product_price
+FROM products;
+
+SELECT
+    COUNT(*) AS total_products
+FROM products;
+
+SELECT
+    MIN(price) AS cheapest_product,
+    MAX(price) AS most_expensive_product
+FROM products;
+
+SELECT
+    order_id,
+    SUM(quantity * unit_price) AS order_total
+FROM order_items
+GROUP BY order_id
+ORDER BY order_id;
+
+SELECT
+    order_id,
+    SUM(quantity * unit_price) AS order_total
+FROM order_items
+GROUP BY order_id
+HAVING SUM(quantity * unit_price) > 500
+ORDER BY order_total DESC;
+
+
 	
