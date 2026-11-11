@@ -373,3 +373,79 @@ VALUES ('This table is only for DROP TABLE practice');
 SELECT * FROM practice_notes;
 
 DROP TABLE practice_notes;
+
+SELECT
+    first_name,
+    last_name,
+    email
+FROM customers;
+
+SELECT
+    product_name,
+    price
+FROM products
+ORDER BY price ASC;
+
+SELECT
+    product_name,
+    stock_quantity
+FROM products
+WHERE stock_quantity < 20;
+
+SELECT
+    o.order_id,
+    c.first_name,
+    c.last_name,
+    o.status
+FROM orders AS o
+INNER JOIN customers AS c
+    ON o.customer_id = c.customer_id;
+
+SELECT
+    o.order_id,
+    p.product_name,
+    oi.quantity,
+    oi.unit_price
+FROM orders AS o
+INNER JOIN order_items AS oi
+    ON o.order_id = oi.order_id
+INNER JOIN products AS p
+    ON oi.product_id = p.product_id;
+
+SELECT
+    order_id,
+    SUM(quantity * unit_price) AS total_order_value
+FROM order_items
+GROUP BY order_id
+ORDER BY order_id;
+
+SELECT
+    ROUND(AVG(price), 2) AS average_price
+FROM products;
+
+SELECT
+    product_name,
+    price
+FROM products
+ORDER BY price DESC
+LIMIT 5;
+
+SELECT
+    COUNT(*) AS total_customers
+FROM customers;
+
+INSERT INTO customers (first_name, last_name, email, phone)
+VALUES (
+    'Thabo',
+    'Mahlangu',
+    'thabo@example.com',
+    '0731234567'
+);
+
+SELECT *
+FROM customers
+WHERE email = 'thabo@example.com';
+
+INSERT INTO orders (customer_id, status)
+VALUES (7, 'PENDING');
+
